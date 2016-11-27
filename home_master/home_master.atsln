@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Atmel Studio Solution File, Format Version 11.00
+Project("{E66E83B9-2572-4076-B26E-6BE79FF3018A}") = "home_master", "home_master.cppproj", "{05F82230-C22F-40B9-A169-A5DF341FA591}"
+EndProject
+Project("{E66E83B9-2572-4076-B26E-6BE79FF3018A}") = "home_slave", "..\home_slave\home_slave.cppproj", "{CEBB5767-D703-4596-82F5-07A4CC64F07D}"
+EndProject
+Project("{E66E83B9-2572-4076-B26E-6BE79FF3018A}") = "home_eeprom", "..\home_eeprom\home_eeprom.cppproj", "{2F5B6A9D-7EFC-4130-A344-B93BAC374F61}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|AVR = Debug|AVR
+		Release|AVR = Release|AVR
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{05F82230-C22F-40B9-A169-A5DF341FA591}.Debug|AVR.ActiveCfg = Debug|AVR
+		{05F82230-C22F-40B9-A169-A5DF341FA591}.Debug|AVR.Build.0 = Debug|AVR
+		{05F82230-C22F-40B9-A169-A5DF341FA591}.Release|AVR.ActiveCfg = Release|AVR
+		{05F82230-C22F-40B9-A169-A5DF341FA591}.Release|AVR.Build.0 = Release|AVR
+		{CEBB5767-D703-4596-82F5-07A4CC64F07D}.Debug|AVR.ActiveCfg = Debug|AVR
+		{CEBB5767-D703-4596-82F5-07A4CC64F07D}.Debug|AVR.Build.0 = Debug|AVR
+		{CEBB5767-D703-4596-82F5-07A4CC64F07D}.Release|AVR.ActiveCfg = Release|AVR
+		{CEBB5767-D703-4596-82F5-07A4CC64F07D}.Release|AVR.Build.0 = Release|AVR
+		{2F5B6A9D-7EFC-4130-A344-B93BAC374F61}.Debug|AVR.ActiveCfg = Debug|AVR
+		{2F5B6A9D-7EFC-4130-A344-B93BAC374F61}.Debug|AVR.Build.0 = Debug|AVR
+		{2F5B6A9D-7EFC-4130-A344-B93BAC374F61}.Release|AVR.ActiveCfg = Release|AVR
+		{2F5B6A9D-7EFC-4130-A344-B93BAC374F61}.Release|AVR.Build.0 = Release|AVR
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
