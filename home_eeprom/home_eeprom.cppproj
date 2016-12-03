@@ -5,7 +5,7 @@
     <ProjectVersion>6.2</ProjectVersion>
     <ToolchainName>com.Atmel.AVRGCC8.CPP</ToolchainName>
     <ProjectGuid>{2f5b6a9d-7efc-4130-a344-b93bac374f61}</ProjectGuid>
-    <avrdevice>atmega2560</avrdevice>
+    <avrdevice>atmega328p</avrdevice>
     <avrdeviceseries>none</avrdeviceseries>
     <OutputType>Executable</OutputType>
     <Language>CPP</Language>
@@ -51,12 +51,13 @@
   <avrgcc.compiler.general.ChangeDefaultBitFieldUnsigned>True</avrgcc.compiler.general.ChangeDefaultBitFieldUnsigned>
   <avrgcc.compiler.symbols.DefSymbols>
     <ListValues>
-      <Value>__AVR_ATmega2560__</Value>
+      <Value>__AVR_ATmega328p__</Value>
+      <Value>__AVR_ATmega328P__</Value>
       <Value>ARDUINO=1612</Value>
       <Value>ARDUINO_MAIN</Value>
       <Value>F_CPU=16000000L</Value>
       <Value>__AVR__</Value>
-      <Value>ARDUINO_AVR_MEGA2560</Value>
+      <Value>ARDUINO_AVR_NANO</Value>
       <Value>ARDUINO_ARCH_AVR</Value>
     </ListValues>
   </avrgcc.compiler.symbols.DefSymbols>
@@ -72,7 +73,7 @@
       <Value>C:/Dev/Arduino/hardware/arduino/avr/libraries/EEPROM/src/utility</Value>
       <Value>C:/Dev/Arduino/hardware/arduino/avr/libraries/EEPROM/src</Value>
       <Value>../../home_eeprom</Value>
-      <Value>C:/Dev/Arduino/hardware/arduino/avr/variants/mega</Value>
+      <Value>C:/Dev/Arduino/hardware/arduino/avr/variants/eightanaloginputs</Value>
       <Value>C:/Dev/Arduino/hardware/arduino/avr/cores/arduino</Value>
     </ListValues>
   </avrgcc.compiler.directories.IncludePaths>
@@ -85,12 +86,13 @@
   <avrgcccpp.compiler.general.ChangeDefaultBitFieldUnsigned>True</avrgcccpp.compiler.general.ChangeDefaultBitFieldUnsigned>
   <avrgcccpp.compiler.symbols.DefSymbols>
     <ListValues>
-      <Value>__AVR_ATmega2560__</Value>
+      <Value>__AVR_ATmega328p__</Value>
+      <Value>__AVR_ATmega328P__</Value>
       <Value>ARDUINO=1612</Value>
       <Value>ARDUINO_MAIN</Value>
       <Value>F_CPU=16000000L</Value>
       <Value>__AVR__</Value>
-      <Value>ARDUINO_AVR_MEGA2560</Value>
+      <Value>ARDUINO_AVR_NANO</Value>
       <Value>ARDUINO_ARCH_AVR</Value>
     </ListValues>
   </avrgcccpp.compiler.symbols.DefSymbols>
@@ -106,7 +108,7 @@
       <Value>C:/Dev/Arduino/hardware/arduino/avr/libraries/EEPROM/src/utility</Value>
       <Value>C:/Dev/Arduino/hardware/arduino/avr/libraries/EEPROM/src</Value>
       <Value>../../home_eeprom</Value>
-      <Value>C:/Dev/Arduino/hardware/arduino/avr/variants/mega</Value>
+      <Value>C:/Dev/Arduino/hardware/arduino/avr/variants/eightanaloginputs</Value>
       <Value>C:/Dev/Arduino/hardware/arduino/avr/cores/arduino</Value>
     </ListValues>
   </avrgcccpp.compiler.directories.IncludePaths>
@@ -118,7 +120,7 @@
   <avrgcccpp.assembler.debugging.DebugLevel>Default (-Wa,-g)</avrgcccpp.assembler.debugging.DebugLevel>
 </AvrGccCpp>
     </ToolchainSettings>
-    <VMSETTING_IncludePaths>C:/Dev/Arduino/hardware/arduino/avr/cores/arduino;C:/Dev/Arduino/hardware/arduino/avr/variants/mega;../../home_eeprom;C:/Dev/Arduino/hardware/arduino/avr/libraries/EEPROM/src;C:/Dev/Arduino/hardware/arduino/avr/libraries/EEPROM/src/utility;C:/Dev/Arduino/libraries;C:/Dev/Arduino/hardware/arduino/avr/libraries;C:/Program Files (x86)/Visual Micro/Visual Micro for Arduino/Micro Platforms/default/debuggers;G:/CloudDrives/OneDrive/W8_Cloud/Documents/Arduino/libraries;G:/CloudDrives/OneDrive/W8_Cloud/Documents/Arduino/libraries/SimpleModbusMasterV2rev2;C:/Dev/Arduino/hardware/tools/avr/avr/include/;C:/Dev/Arduino/hardware/tools/avr//avr/include/avr/;C:/Dev/Arduino/hardware/tools/avr/lib/gcc/avr/4.8.1/include;</VMSETTING_IncludePaths>
+    <VMSETTING_IncludePaths>C:/Dev/Arduino/hardware/arduino/avr/cores/arduino;C:/Dev/Arduino/hardware/arduino/avr/variants/mega;../../home_eeprom;C:/Dev/Arduino/hardware/arduino/avr/libraries/EEPROM/src;C:/Dev/Arduino/hardware/arduino/avr/libraries/EEPROM/src/utility;C:/Dev/Arduino/libraries;C:/Dev/Arduino/hardware/arduino/avr/libraries;C:/Program Files (x86)/Visual Micro/Visual Micro for Arduino/Micro Platforms/default/debuggers;G:/CloudDrives/OneDrive/W8_Cloud/Documents/Arduino/libraries;G:/CloudDrives/OneDrive/W8_Cloud/Documents/Arduino/libraries/SimpleModbusMasterV2rev2;C:/Dev/Arduino/hardware/tools/avr/avr/include/;C:/Dev/Arduino/hardware/tools/avr//avr/include/avr/;C:/Dev/Arduino/hardware/tools/avr/lib/gcc/avr/4.8.1/include;G:/CloudDrives/OneDrive/W8_Cloud/Documents/Arduino/libraries/Arduino-Temperature-Control-Library-master;G:/CloudDrives/OneDrive/W8_Cloud/Documents/Arduino/libraries/Bounce2-master;G:/CloudDrives/OneDrive/W8_Cloud/Documents/Arduino/libraries/OneWire;G:/CloudDrives/OneDrive/W8_Cloud/Documents/Arduino/libraries/SimpleModbusSlaveV10;C:/Dev/Arduino/hardware/arduino/avr/variants/eightanaloginputs;G:/CloudDrives/OneDrive/W8_Cloud/Documents/Arduino/libraries/DHT-sensor-library-master;</VMSETTING_IncludePaths>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <ToolchainSettings>
@@ -132,12 +134,13 @@
   <avrgcc.compiler.general.ChangeDefaultBitFieldUnsigned>True</avrgcc.compiler.general.ChangeDefaultBitFieldUnsigned>
   <avrgcc.compiler.symbols.DefSymbols>
     <ListValues>
-      <Value>__AVR_ATmega2560__</Value>
+      <Value>__AVR_ATmega328p__</Value>
+      <Value>__AVR_ATmega328P__</Value>
       <Value>ARDUINO=1612</Value>
       <Value>ARDUINO_MAIN</Value>
       <Value>F_CPU=16000000L</Value>
       <Value>__AVR__</Value>
-      <Value>ARDUINO_AVR_MEGA2560</Value>
+      <Value>ARDUINO_AVR_NANO</Value>
       <Value>ARDUINO_ARCH_AVR</Value>
     </ListValues>
   </avrgcc.compiler.symbols.DefSymbols>
@@ -153,7 +156,7 @@
       <Value>C:/Dev/Arduino/hardware/arduino/avr/libraries/EEPROM/src/utility</Value>
       <Value>C:/Dev/Arduino/hardware/arduino/avr/libraries/EEPROM/src</Value>
       <Value>../../home_eeprom</Value>
-      <Value>C:/Dev/Arduino/hardware/arduino/avr/variants/mega</Value>
+      <Value>C:/Dev/Arduino/hardware/arduino/avr/variants/eightanaloginputs</Value>
       <Value>C:/Dev/Arduino/hardware/arduino/avr/cores/arduino</Value>
     </ListValues>
   </avrgcc.compiler.directories.IncludePaths>
@@ -166,12 +169,13 @@
   <avrgcccpp.compiler.general.ChangeDefaultBitFieldUnsigned>True</avrgcccpp.compiler.general.ChangeDefaultBitFieldUnsigned>
   <avrgcccpp.compiler.symbols.DefSymbols>
     <ListValues>
-      <Value>__AVR_ATmega2560__</Value>
+      <Value>__AVR_ATmega328p__</Value>
+      <Value>__AVR_ATmega328P__</Value>
       <Value>ARDUINO=1612</Value>
       <Value>ARDUINO_MAIN</Value>
       <Value>F_CPU=16000000L</Value>
       <Value>__AVR__</Value>
-      <Value>ARDUINO_AVR_MEGA2560</Value>
+      <Value>ARDUINO_AVR_NANO</Value>
       <Value>ARDUINO_ARCH_AVR</Value>
     </ListValues>
   </avrgcccpp.compiler.symbols.DefSymbols>
@@ -187,7 +191,7 @@
       <Value>C:/Dev/Arduino/hardware/arduino/avr/libraries/EEPROM/src/utility</Value>
       <Value>C:/Dev/Arduino/hardware/arduino/avr/libraries/EEPROM/src</Value>
       <Value>../../home_eeprom</Value>
-      <Value>C:/Dev/Arduino/hardware/arduino/avr/variants/mega</Value>
+      <Value>C:/Dev/Arduino/hardware/arduino/avr/variants/eightanaloginputs</Value>
       <Value>C:/Dev/Arduino/hardware/arduino/avr/cores/arduino</Value>
     </ListValues>
   </avrgcccpp.compiler.directories.IncludePaths>
@@ -199,7 +203,7 @@
   <avrgcccpp.assembler.debugging.DebugLevel>Default (-Wa,-g)</avrgcccpp.assembler.debugging.DebugLevel>
 </AvrGccCpp>
     </ToolchainSettings>
-    <VMSETTING_IncludePaths>C:/Dev/Arduino/hardware/arduino/avr/cores/arduino;C:/Dev/Arduino/hardware/arduino/avr/variants/mega;../../home_eeprom;C:/Dev/Arduino/hardware/arduino/avr/libraries/EEPROM/src;C:/Dev/Arduino/hardware/arduino/avr/libraries/EEPROM/src/utility;C:/Dev/Arduino/libraries;C:/Dev/Arduino/hardware/arduino/avr/libraries;C:/Program Files (x86)/Visual Micro/Visual Micro for Arduino/Micro Platforms/default/debuggers;G:/CloudDrives/OneDrive/W8_Cloud/Documents/Arduino/libraries;G:/CloudDrives/OneDrive/W8_Cloud/Documents/Arduino/libraries/SimpleModbusMasterV2rev2;C:/Dev/Arduino/hardware/tools/avr/avr/include/;C:/Dev/Arduino/hardware/tools/avr//avr/include/avr/;C:/Dev/Arduino/hardware/tools/avr/lib/gcc/avr/4.8.1/include;</VMSETTING_IncludePaths>
+    <VMSETTING_IncludePaths>C:/Dev/Arduino/hardware/arduino/avr/cores/arduino;C:/Dev/Arduino/hardware/arduino/avr/variants/mega;../../home_eeprom;C:/Dev/Arduino/hardware/arduino/avr/libraries/EEPROM/src;C:/Dev/Arduino/hardware/arduino/avr/libraries/EEPROM/src/utility;C:/Dev/Arduino/libraries;C:/Dev/Arduino/hardware/arduino/avr/libraries;C:/Program Files (x86)/Visual Micro/Visual Micro for Arduino/Micro Platforms/default/debuggers;G:/CloudDrives/OneDrive/W8_Cloud/Documents/Arduino/libraries;G:/CloudDrives/OneDrive/W8_Cloud/Documents/Arduino/libraries/SimpleModbusMasterV2rev2;C:/Dev/Arduino/hardware/tools/avr/avr/include/;C:/Dev/Arduino/hardware/tools/avr//avr/include/avr/;C:/Dev/Arduino/hardware/tools/avr/lib/gcc/avr/4.8.1/include;G:/CloudDrives/OneDrive/W8_Cloud/Documents/Arduino/libraries/Arduino-Temperature-Control-Library-master;G:/CloudDrives/OneDrive/W8_Cloud/Documents/Arduino/libraries/Bounce2-master;G:/CloudDrives/OneDrive/W8_Cloud/Documents/Arduino/libraries/OneWire;G:/CloudDrives/OneDrive/W8_Cloud/Documents/Arduino/libraries/SimpleModbusSlaveV10;C:/Dev/Arduino/hardware/arduino/avr/variants/eightanaloginputs;G:/CloudDrives/OneDrive/W8_Cloud/Documents/Arduino/libraries/DHT-sensor-library-master;</VMSETTING_IncludePaths>
   </PropertyGroup>
   <ItemGroup>
     <None Include="home_eeprom.ino">

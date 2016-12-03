@@ -25,6 +25,7 @@ void update_RGB_ON4(unsigned char val);
 void encodeFloat(uint16_t *regs, float x);
 float decodeFloat(const uint16_t *regs);
 float gloabl_RGB(byte r, byte g, byte b);
+void keyTrigger(String msg);
 
 #include "C:\Dev\Arduino\hardware\arduino\avr\variants\mega\pins_arduino.h" 
 #include "C:\Dev\Arduino\hardware\arduino\avr\cores\arduino\arduino.h"
@@ -33,3 +34,4 @@ float gloabl_RGB(byte r, byte g, byte b);
 #include <key_pad.h>
 #include <keypad_class.cpp>
 #include <keypad_class.h>
+#include <master.h>

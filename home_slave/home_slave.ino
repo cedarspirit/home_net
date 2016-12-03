@@ -4,6 +4,8 @@
 #include <OneWire.h>
 
 #include <DallasTemperature.h>
+#include <dht.h>
+
 
 /* 
    SimpleModbusSlaveV10 supports function 3, 6 & 16.
@@ -41,6 +43,8 @@
 
 #define  LED 9  
 #define SLAVE_ID 3
+#define DHTPIN 5     // what pin we're connected to
+#define DHTTYPE DHT21    //DHT11   // DHT 11
 
 #define RELAY_ON 1
 #define RELAY_OFF 0
@@ -59,6 +63,7 @@ DeviceAddress sensorDeviceAddress;
 
 union Pun {float f; uint32_t u;};  //http://stackoverflow.com/questions/28185196/modbus-floating-point-conversion
 
+dht DHT;
 
 // Using the enum instruction allows for an easy method for adding and 
 // removing registers. Doing it this way saves you #defining the size 
@@ -95,6 +100,7 @@ enum EEPROM_STORE{     // build hardware info based on HW Profile from EEPROM
 	HP_RELAY_1,
 	HP_PIR_1,
 	HP_SWITCH_1,
+	HP_DHT11_1,
 };
 
 
@@ -114,6 +120,10 @@ enum SLAVE_RESOURCES
 	HR_RGB_1_G,   // OUTPUT PINS
 	HR_RGB_1_B,   // OUTPUT PINS
 	HR_RELAY_1, // OUTPUT PINS
+	HR_DHT11_1_T_MSB,
+	HR_DHT11_1_T_LSB,
+	HR_DHT11_1_H_MSB,
+	HR_DHT11_1_H_LSB,
 	HOLDING_REGS_SIZE // leave this one
   // total number of registers for function 3 and 16 share the same register array
   // i.e. the same address space
@@ -128,7 +138,7 @@ byte hw_address;
 byte hw_profile;
 
 unsigned long last_temperature_sample_time;
-
+unsigned long last_dht11_sample_time;
 byte curRelayStatus;
 
 Bounce debouncer = Bounce(); 
@@ -155,6 +165,11 @@ void setup()
 		  sensors.setResolution(sensorDeviceAddress, SENSOR_RESOLUTION);
 		  last_temperature_sample_time = millis();			
 		}
+	
+	if (cfg_hw[HP_DHT11_1]) {
+		//dht.begin();
+		last_dht11_sample_time = millis();
+	}
 	
 	
 	if (cfg_hw[HP_SWITCH_1]){
@@ -242,6 +257,8 @@ void loop()
      analogWrite(LED, holdingRegs[1]/4);
   */
 
+
+
 	if (cfg_hw[HP_TEMP_1])
 	{
 		if ((last_temperature_sample_time - millis() ) > 1000) {
@@ -249,11 +266,62 @@ void loop()
 
 	 //holdingRegs[HR_TEMP_1_MSB] = millis();  //TJ TEST ONLY
 			sensors.requestTemperatures();
-			
 			encodeFloat(&holdingRegs[HR_TEMP_1_MSB],sensors.getTempCByIndex(SENSOR_INDEX)) ;
 			
 		}
 	}
+
+
+if (cfg_hw[HP_DHT11_1]) 
+	{
+		if ( (millis() - last_dht11_sample_time  ) > 2000) {
+			
+		int chk = DHT.read21(DHTPIN);
+				float t = -99;
+				float h = -99;		
+		switch (chk)
+		{
+			case DHTLIB_OK:
+				//Serial.print("OK,\t");
+				t = DHT.temperature;
+				h = DHT.humidity;
+				encodeFloat(&holdingRegs[HR_DHT11_1_T_MSB],t) ;
+				encodeFloat(&holdingRegs[HR_DHT11_1_H_MSB],h) ;				
+				break;
+
+//#if(0)
+//			case DHTLIB_ERROR_CHECKSUM:
+				//Serial.print("Checksum error,\t");
+//				break;
+//			case DHTLIB_ERROR_TIMEOUT:
+				//Serial.print("Time out error,\t");
+//				break;
+//			case DHTLIB_ERROR_CONNECT:
+				//Serial.print("Connect error,\t");
+//				break;
+//			case DHTLIB_ERROR_ACK_L:
+				//Serial.print("Ack Low error,\t");
+//				break;
+//			case DHTLIB_ERROR_ACK_H:
+				//Serial.print("Ack High error,\t");
+//				break;
+//#endif				
+			default:
+				//Serial.print("Unknown error,\t");
+				encodeFloat(&holdingRegs[HR_DHT11_1_T_MSB],t+chk) ;
+				encodeFloat(&holdingRegs[HR_DHT11_1_H_MSB],h+chk) ;				
+				break;
+		}			
+			
+
+		last_dht11_sample_time= millis();
+			
+		}
+	}	
+
+
+
+
 
 	if(cfg_hw[HP_PIR_1]){
 		holdingRegs[HR_PIR_1]=  digitalRead(PIN_PIR);
@@ -310,6 +378,7 @@ void fncBuildHwConfiguration(byte thisProfile){
 			cfg_hw[HP_TEMP_1]=true;
 			cfg_hw[HP_RELAY_1]=true;
 			cfg_hw[HP_PIR_1]=true;
+			cfg_hw[HP_DHT11_1]=true;
 			break;
 			default:
 			break;

@@ -69,8 +69,12 @@
       <Value>C:/Program Files (x86)/Visual Micro/Visual Micro for Arduino/Micro Platforms/default/debuggers</Value>
       <Value>C:/Dev/Arduino/hardware/arduino/avr/libraries</Value>
       <Value>C:/Dev/Arduino/libraries</Value>
+      <Value>C:/Dev/Arduino/hardware/arduino/avr/libraries/Wire/src/utility</Value>
+      <Value>C:/Dev/Arduino/hardware/arduino/avr/libraries/Wire/src</Value>
       <Value>G:/CloudDrives/OneDrive/W8_Cloud/Documents/Arduino/libraries/SimpleModbusMasterV2rev2/utility</Value>
       <Value>G:/CloudDrives/OneDrive/W8_Cloud/Documents/Arduino/libraries/SimpleModbusMasterV2rev2</Value>
+      <Value>G:/CloudDrives/OneDrive/W8_Cloud/Documents/Arduino/libraries/RTClib/utility</Value>
+      <Value>G:/CloudDrives/OneDrive/W8_Cloud/Documents/Arduino/libraries/RTClib</Value>
       <Value>G:/CloudDrives/OneDrive/W8_Cloud/Documents/Arduino/libraries/openGLCD/utility</Value>
       <Value>G:/CloudDrives/OneDrive/W8_Cloud/Documents/Arduino/libraries/openGLCD</Value>
       <Value>G:/CloudDrives/OneDrive/W8_Cloud/Documents/Arduino/libraries/Keypad/src/utility</Value>
@@ -107,8 +111,12 @@
       <Value>C:/Program Files (x86)/Visual Micro/Visual Micro for Arduino/Micro Platforms/default/debuggers</Value>
       <Value>C:/Dev/Arduino/hardware/arduino/avr/libraries</Value>
       <Value>C:/Dev/Arduino/libraries</Value>
+      <Value>C:/Dev/Arduino/hardware/arduino/avr/libraries/Wire/src/utility</Value>
+      <Value>C:/Dev/Arduino/hardware/arduino/avr/libraries/Wire/src</Value>
       <Value>G:/CloudDrives/OneDrive/W8_Cloud/Documents/Arduino/libraries/SimpleModbusMasterV2rev2/utility</Value>
       <Value>G:/CloudDrives/OneDrive/W8_Cloud/Documents/Arduino/libraries/SimpleModbusMasterV2rev2</Value>
+      <Value>G:/CloudDrives/OneDrive/W8_Cloud/Documents/Arduino/libraries/RTClib/utility</Value>
+      <Value>G:/CloudDrives/OneDrive/W8_Cloud/Documents/Arduino/libraries/RTClib</Value>
       <Value>G:/CloudDrives/OneDrive/W8_Cloud/Documents/Arduino/libraries/openGLCD/utility</Value>
       <Value>G:/CloudDrives/OneDrive/W8_Cloud/Documents/Arduino/libraries/openGLCD</Value>
       <Value>G:/CloudDrives/OneDrive/W8_Cloud/Documents/Arduino/libraries/Keypad/src/utility</Value>
@@ -126,7 +134,7 @@
   <avrgcccpp.assembler.debugging.DebugLevel>Default (-Wa,-g)</avrgcccpp.assembler.debugging.DebugLevel>
 </AvrGccCpp>
     </ToolchainSettings>
-    <VMSETTING_IncludePaths>C:/Dev/Arduino/hardware/arduino/avr/cores/arduino;C:/Dev/Arduino/hardware/arduino/avr/variants/mega;../../home_master;G:/CloudDrives/OneDrive/W8_Cloud/Documents/Arduino/libraries/SimpleModbusMasterV2rev2;G:/CloudDrives/OneDrive/W8_Cloud/Documents/Arduino/libraries/SimpleModbusMasterV2rev2/utility;C:/Dev/Arduino/libraries;C:/Dev/Arduino/hardware/arduino/avr/libraries;C:/Program Files (x86)/Visual Micro/Visual Micro for Arduino/Micro Platforms/default/debuggers;G:/CloudDrives/OneDrive/W8_Cloud/Documents/Arduino/libraries;C:/Dev/Arduino/hardware/tools/avr/avr/include/;C:/Dev/Arduino/hardware/tools/avr//avr/include/avr/;C:/Dev/Arduino/hardware/tools/avr/lib/gcc/avr/4.8.1/include;G:/CloudDrives/OneDrive/W8_Cloud/Documents/Arduino/libraries/Keypad/src;G:/CloudDrives/OneDrive/W8_Cloud/Documents/Arduino/libraries/Keypad/src/utility;G:/CloudDrives/OneDrive/W8_Cloud/Documents/Arduino/libraries/openGLCD;G:/CloudDrives/OneDrive/W8_Cloud/Documents/Arduino/libraries/openGLCD/utility;</VMSETTING_IncludePaths>
+    <VMSETTING_IncludePaths>C:/Dev/Arduino/hardware/arduino/avr/cores/arduino;C:/Dev/Arduino/hardware/arduino/avr/variants/mega;../../home_master;G:/CloudDrives/OneDrive/W8_Cloud/Documents/Arduino/libraries/SimpleModbusMasterV2rev2;G:/CloudDrives/OneDrive/W8_Cloud/Documents/Arduino/libraries/SimpleModbusMasterV2rev2/utility;C:/Dev/Arduino/libraries;C:/Dev/Arduino/hardware/arduino/avr/libraries;C:/Program Files (x86)/Visual Micro/Visual Micro for Arduino/Micro Platforms/default/debuggers;G:/CloudDrives/OneDrive/W8_Cloud/Documents/Arduino/libraries;C:/Dev/Arduino/hardware/tools/avr/avr/include/;C:/Dev/Arduino/hardware/tools/avr//avr/include/avr/;C:/Dev/Arduino/hardware/tools/avr/lib/gcc/avr/4.8.1/include;G:/CloudDrives/OneDrive/W8_Cloud/Documents/Arduino/libraries/Keypad/src;G:/CloudDrives/OneDrive/W8_Cloud/Documents/Arduino/libraries/Keypad/src/utility;G:/CloudDrives/OneDrive/W8_Cloud/Documents/Arduino/libraries/openGLCD;G:/CloudDrives/OneDrive/W8_Cloud/Documents/Arduino/libraries/openGLCD/utility;G:/CloudDrives/OneDrive/W8_Cloud/Documents/Arduino/libraries/RTClib;G:/CloudDrives/OneDrive/W8_Cloud/Documents/Arduino/libraries/RTClib/utility;C:/Dev/Arduino/hardware/arduino/avr/libraries/Wire/src;C:/Dev/Arduino/hardware/arduino/avr/libraries/Wire/src/utility;C:/Dev/Arduino/hardware/arduino/avr/libraries/EEPROM/src;G:/CloudDrives/OneDrive/W8_Cloud/Documents/Arduino/libraries/Arduino-Temperature-Control-Library-master;G:/CloudDrives/OneDrive/W8_Cloud/Documents/Arduino/libraries/Bounce2-master;G:/CloudDrives/OneDrive/W8_Cloud/Documents/Arduino/libraries/DHT-sensor-library-master;G:/CloudDrives/OneDrive/W8_Cloud/Documents/Arduino/libraries/OneWire;G:/CloudDrives/OneDrive/W8_Cloud/Documents/Arduino/libraries/SimpleModbusSlaveV10;</VMSETTING_IncludePaths>
     <VisualMicroSettings>
       <VisualMicroSettings>
         <arduino.board.name>mega_atmega2560</arduino.board.name>
@@ -221,7 +229,7 @@ compiler.elf2hex.extra_flags=
 recipe.c.o.pattern="{compiler.path}{compiler.c.cmd}" {compiler.c.flags} -mmcu={build.mcu} -DF_CPU={build.f_cpu} -DARDUINO={runtime.ide.version} -DARDUINO_{build.board} -DARDUINO_ARCH_{build.arch} {compiler.c.extra_flags} {build.extra_flags} {includes} "{source_file}" -o "{object_file}"
 recipe.cpp.o.pattern="{compiler.path}{compiler.cpp.cmd}" {compiler.cpp.flags} -mmcu={build.mcu} -DF_CPU={build.f_cpu} -DARDUINO={runtime.ide.version} -DARDUINO_{build.board} -DARDUINO_ARCH_{build.arch} {compiler.cpp.extra_flags} {build.extra_flags} {includes} "{source_file}" -o "{object_file}"
 recipe.S.o.pattern="{compiler.path}{compiler.c.cmd}" {compiler.S.flags} -mmcu={build.mcu} -DF_CPU={build.f_cpu} -DARDUINO={runtime.ide.version} -DARDUINO_{build.board} -DARDUINO_ARCH_{build.arch} {compiler.S.extra_flags} {build.extra_flags} {includes} "{source_file}" -o "{object_file}"
-archive_file_path=C:\Users\tj\AppData\Local\V.Micro\Arduino\Builds\home_master\mega_atmega2560\core.a
+archive_file_path=C:\Users\tj\AppData\Local\V.Micro\Arduino\Builds\home_slave\mega_atmega2560\core.a
 recipe.ar.pattern="{compiler.path}{compiler.ar.cmd}" {compiler.ar.flags} {compiler.ar.extra_flags} "{archive_file_path}" "{object_file}"
 recipe.c.combine.pattern="{compiler.path}{compiler.c.elf.cmd}" {compiler.c.elf.flags} -mmcu={build.mcu} {compiler.c.elf.extra_flags} -o "{build.path}/{build.project_name}.elf" {object_files} "{build.path}/{archive_file}" "-L{build.path}" -lm
 recipe.objcopy.eep.pattern="{compiler.path}{compiler.objcopy.cmd}" {compiler.objcopy.eep.flags} {compiler.objcopy.eep.extra_flags} "{build.path}/{build.project_name}.elf" "{build.path}/{build.project_name}.eep"
@@ -317,20 +325,20 @@ vm.runtime.compiler.showwarnings=false
 serial.port.file=COM14
 serial.port=COM14
 serial.port.num=14
-build.source.path=D:\git_local\home_net\home_master\home_master.ino
-extra.time.local=68008347
-includes= -I"C:\Dev\Arduino\hardware\arduino\avr\cores\arduino"  -I"C:\Dev\Arduino\hardware\arduino\avr\variants\mega"  -I"G:\CloudDrives\OneDrive\W8_Cloud\Documents\Arduino\libraries\Keypad\src"  -I"G:\CloudDrives\OneDrive\W8_Cloud\Documents\Arduino\libraries\SimpleModbusMasterV2rev2"  -I"C:\Dev\Arduino\libraries"  -I"C:\Dev\Arduino\hardware\arduino\avr\libraries"  -I"C:\Program Files (x86)\Visual Micro\Visual Micro for Arduino\Micro Platforms\default\debuggers"  -I"G:\CloudDrives\OneDrive\W8_Cloud\Documents\Arduino\libraries" 
-build.path=C:\Users\tj\AppData\Local\V.Micro\Arduino\Builds\home_master\mega_atmega2560
-build.project_name=home_master
+build.source.path=D:\git_local\home_net\home_slave\home_slave.ino
+extra.time.local=30457672
+includes= -I"C:\Dev\Arduino\hardware\arduino\avr\cores\arduino"  -I"C:\Dev\Arduino\hardware\arduino\avr\variants\mega"  -I"G:\CloudDrives\OneDrive\W8_Cloud\Documents\Arduino\libraries\Arduino-Temperature-Control-Library-master"  -I"G:\CloudDrives\OneDrive\W8_Cloud\Documents\Arduino\libraries\Bounce2-master"  -I"G:\CloudDrives\OneDrive\W8_Cloud\Documents\Arduino\libraries\DHT-sensor-library-master"  -I"C:\Dev\Arduino\hardware\arduino\avr\libraries\EEPROM\src"  -I"G:\CloudDrives\OneDrive\W8_Cloud\Documents\Arduino\libraries\OneWire"  -I"G:\CloudDrives\OneDrive\W8_Cloud\Documents\Arduino\libraries\SimpleModbusSlaveV10"  -I"C:\Dev\Arduino\libraries"  -I"C:\Dev\Arduino\hardware\arduino\avr\libraries"  -I"C:\Program Files (x86)\Visual Micro\Visual Micro for Arduino\Micro Platforms\default\debuggers"  -I"G:\CloudDrives\OneDrive\W8_Cloud\Documents\Arduino\libraries" 
+build.path=C:\Users\tj\AppData\Local\V.Micro\Arduino\Builds\home_slave\mega_atmega2560
+build.project_name=home_slave
 build.variant.path=C:\Dev\Arduino\hardware\arduino\avr\variants\mega
 build.core.path=C:\Dev\Arduino\hardware\arduino\avr\cores\arduino
 archive_file=core.a
-build.path_sketch=C:\Users\tj\AppData\Local\V.Micro\Arduino\Builds\home_master\mega_atmega2560
-build.path_core=C:\Users\tj\AppData\Local\V.Micro\Arduino\Builds\home_master\mega_atmega2560\core
-build.path_libraries=C:\Users\tj\AppData\Local\V.Micro\Arduino\Builds\home_master\mega_atmega2560
-object_file=C:\Users\tj\AppData\Local\V.Micro\Arduino\Builds\home_master\mega_atmega2560\SimpleModbusMasterV2rev2\SimpleModbusMaster.cpp.o
-source_file=G:\CloudDrives\OneDrive\W8_Cloud\Documents\Arduino\libraries\SimpleModbusMasterV2rev2\SimpleModbusMaster.cpp
-object_files="C:\Users\tj\AppData\Local\V.Micro\Arduino\Builds\home_master\mega_atmega2560\home_master.cpp.o" "C:\Users\tj\AppData\Local\V.Micro\Arduino\Builds\home_master\mega_atmega2560\key_pad.cpp.o" "C:\Users\tj\AppData\Local\V.Micro\Arduino\Builds\home_master\mega_atmega2560\Keypad\Key.cpp.o" "C:\Users\tj\AppData\Local\V.Micro\Arduino\Builds\home_master\mega_atmega2560\Keypad\Keypad.cpp.o" "C:\Users\tj\AppData\Local\V.Micro\Arduino\Builds\home_master\mega_atmega2560\SimpleModbusMasterV2rev2\SimpleModbusMaster.cpp.o" 
+build.path_sketch=C:\Users\tj\AppData\Local\V.Micro\Arduino\Builds\home_slave\mega_atmega2560
+build.path_core=C:\Users\tj\AppData\Local\V.Micro\Arduino\Builds\home_slave\mega_atmega2560\core
+build.path_libraries=C:\Users\tj\AppData\Local\V.Micro\Arduino\Builds\home_slave\mega_atmega2560
+object_file=C:\Users\tj\AppData\Local\V.Micro\Arduino\Builds\home_slave\mega_atmega2560\SimpleModbusSlaveV10\SimpleModbusSlave.cpp.o
+source_file=G:\CloudDrives\OneDrive\W8_Cloud\Documents\Arduino\libraries\SimpleModbusSlaveV10\SimpleModbusSlave.cpp
+object_files="C:\Users\tj\AppData\Local\V.Micro\Arduino\Builds\home_slave\mega_atmega2560\home_slave.cpp.o" "C:\Users\tj\AppData\Local\V.Micro\Arduino\Builds\home_slave\mega_atmega2560\Arduino-Temperature-Control-Library-master\DallasTemperature.cpp.o" "C:\Users\tj\AppData\Local\V.Micro\Arduino\Builds\home_slave\mega_atmega2560\Bounce2-master\Bounce2.cpp.o" "C:\Users\tj\AppData\Local\V.Micro\Arduino\Builds\home_slave\mega_atmega2560\DHT-sensor-library-master\DHT.cpp.o" "C:\Users\tj\AppData\Local\V.Micro\Arduino\Builds\home_slave\mega_atmega2560\OneWire\OneWire.cpp.o" "C:\Users\tj\AppData\Local\V.Micro\Arduino\Builds\home_slave\mega_atmega2560\SimpleModbusSlaveV10\SimpleModbusSlave.cpp.o" 
 </arduino.board.property_bag>
         <arduino.build.mcu>atmega2560</arduino.build.mcu>
         <arduino.build.f_cpu>16000000L</arduino.build.f_cpu>
@@ -375,8 +383,12 @@ object_files="C:\Users\tj\AppData\Local\V.Micro\Arduino\Builds\home_master\mega_
       <Value>C:/Program Files (x86)/Visual Micro/Visual Micro for Arduino/Micro Platforms/default/debuggers</Value>
       <Value>C:/Dev/Arduino/hardware/arduino/avr/libraries</Value>
       <Value>C:/Dev/Arduino/libraries</Value>
+      <Value>C:/Dev/Arduino/hardware/arduino/avr/libraries/Wire/src/utility</Value>
+      <Value>C:/Dev/Arduino/hardware/arduino/avr/libraries/Wire/src</Value>
       <Value>G:/CloudDrives/OneDrive/W8_Cloud/Documents/Arduino/libraries/SimpleModbusMasterV2rev2/utility</Value>
       <Value>G:/CloudDrives/OneDrive/W8_Cloud/Documents/Arduino/libraries/SimpleModbusMasterV2rev2</Value>
+      <Value>G:/CloudDrives/OneDrive/W8_Cloud/Documents/Arduino/libraries/RTClib/utility</Value>
+      <Value>G:/CloudDrives/OneDrive/W8_Cloud/Documents/Arduino/libraries/RTClib</Value>
       <Value>G:/CloudDrives/OneDrive/W8_Cloud/Documents/Arduino/libraries/openGLCD/utility</Value>
       <Value>G:/CloudDrives/OneDrive/W8_Cloud/Documents/Arduino/libraries/openGLCD</Value>
       <Value>G:/CloudDrives/OneDrive/W8_Cloud/Documents/Arduino/libraries/Keypad/src/utility</Value>
@@ -413,8 +425,12 @@ object_files="C:\Users\tj\AppData\Local\V.Micro\Arduino\Builds\home_master\mega_
       <Value>C:/Program Files (x86)/Visual Micro/Visual Micro for Arduino/Micro Platforms/default/debuggers</Value>
       <Value>C:/Dev/Arduino/hardware/arduino/avr/libraries</Value>
       <Value>C:/Dev/Arduino/libraries</Value>
+      <Value>C:/Dev/Arduino/hardware/arduino/avr/libraries/Wire/src/utility</Value>
+      <Value>C:/Dev/Arduino/hardware/arduino/avr/libraries/Wire/src</Value>
       <Value>G:/CloudDrives/OneDrive/W8_Cloud/Documents/Arduino/libraries/SimpleModbusMasterV2rev2/utility</Value>
       <Value>G:/CloudDrives/OneDrive/W8_Cloud/Documents/Arduino/libraries/SimpleModbusMasterV2rev2</Value>
+      <Value>G:/CloudDrives/OneDrive/W8_Cloud/Documents/Arduino/libraries/RTClib/utility</Value>
+      <Value>G:/CloudDrives/OneDrive/W8_Cloud/Documents/Arduino/libraries/RTClib</Value>
       <Value>G:/CloudDrives/OneDrive/W8_Cloud/Documents/Arduino/libraries/openGLCD/utility</Value>
       <Value>G:/CloudDrives/OneDrive/W8_Cloud/Documents/Arduino/libraries/openGLCD</Value>
       <Value>G:/CloudDrives/OneDrive/W8_Cloud/Documents/Arduino/libraries/Keypad/src/utility</Value>
@@ -432,7 +448,7 @@ object_files="C:\Users\tj\AppData\Local\V.Micro\Arduino\Builds\home_master\mega_
   <avrgcccpp.assembler.debugging.DebugLevel>Default (-Wa,-g)</avrgcccpp.assembler.debugging.DebugLevel>
 </AvrGccCpp>
     </ToolchainSettings>
-    <VMSETTING_IncludePaths>C:/Dev/Arduino/hardware/arduino/avr/cores/arduino;C:/Dev/Arduino/hardware/arduino/avr/variants/mega;../../home_master;G:/CloudDrives/OneDrive/W8_Cloud/Documents/Arduino/libraries/SimpleModbusMasterV2rev2;G:/CloudDrives/OneDrive/W8_Cloud/Documents/Arduino/libraries/SimpleModbusMasterV2rev2/utility;C:/Dev/Arduino/libraries;C:/Dev/Arduino/hardware/arduino/avr/libraries;C:/Program Files (x86)/Visual Micro/Visual Micro for Arduino/Micro Platforms/default/debuggers;G:/CloudDrives/OneDrive/W8_Cloud/Documents/Arduino/libraries;C:/Dev/Arduino/hardware/tools/avr/avr/include/;C:/Dev/Arduino/hardware/tools/avr//avr/include/avr/;C:/Dev/Arduino/hardware/tools/avr/lib/gcc/avr/4.8.1/include;G:/CloudDrives/OneDrive/W8_Cloud/Documents/Arduino/libraries/Keypad/src;G:/CloudDrives/OneDrive/W8_Cloud/Documents/Arduino/libraries/Keypad/src/utility;G:/CloudDrives/OneDrive/W8_Cloud/Documents/Arduino/libraries/openGLCD;G:/CloudDrives/OneDrive/W8_Cloud/Documents/Arduino/libraries/openGLCD/utility;</VMSETTING_IncludePaths>
+    <VMSETTING_IncludePaths>C:/Dev/Arduino/hardware/arduino/avr/cores/arduino;C:/Dev/Arduino/hardware/arduino/avr/variants/mega;../../home_master;G:/CloudDrives/OneDrive/W8_Cloud/Documents/Arduino/libraries/SimpleModbusMasterV2rev2;G:/CloudDrives/OneDrive/W8_Cloud/Documents/Arduino/libraries/SimpleModbusMasterV2rev2/utility;C:/Dev/Arduino/libraries;C:/Dev/Arduino/hardware/arduino/avr/libraries;C:/Program Files (x86)/Visual Micro/Visual Micro for Arduino/Micro Platforms/default/debuggers;G:/CloudDrives/OneDrive/W8_Cloud/Documents/Arduino/libraries;C:/Dev/Arduino/hardware/tools/avr/avr/include/;C:/Dev/Arduino/hardware/tools/avr//avr/include/avr/;C:/Dev/Arduino/hardware/tools/avr/lib/gcc/avr/4.8.1/include;G:/CloudDrives/OneDrive/W8_Cloud/Documents/Arduino/libraries/Keypad/src;G:/CloudDrives/OneDrive/W8_Cloud/Documents/Arduino/libraries/Keypad/src/utility;G:/CloudDrives/OneDrive/W8_Cloud/Documents/Arduino/libraries/openGLCD;G:/CloudDrives/OneDrive/W8_Cloud/Documents/Arduino/libraries/openGLCD/utility;G:/CloudDrives/OneDrive/W8_Cloud/Documents/Arduino/libraries/RTClib;G:/CloudDrives/OneDrive/W8_Cloud/Documents/Arduino/libraries/RTClib/utility;C:/Dev/Arduino/hardware/arduino/avr/libraries/Wire/src;C:/Dev/Arduino/hardware/arduino/avr/libraries/Wire/src/utility;C:/Dev/Arduino/hardware/arduino/avr/libraries/EEPROM/src;G:/CloudDrives/OneDrive/W8_Cloud/Documents/Arduino/libraries/Arduino-Temperature-Control-Library-master;G:/CloudDrives/OneDrive/W8_Cloud/Documents/Arduino/libraries/Bounce2-master;G:/CloudDrives/OneDrive/W8_Cloud/Documents/Arduino/libraries/DHT-sensor-library-master;G:/CloudDrives/OneDrive/W8_Cloud/Documents/Arduino/libraries/OneWire;G:/CloudDrives/OneDrive/W8_Cloud/Documents/Arduino/libraries/SimpleModbusSlaveV10;</VMSETTING_IncludePaths>
     <VisualMicroSettings>
       <VisualMicroSettings>
         <arduino.board.name>mega_atmega2560</arduino.board.name>
@@ -527,7 +543,7 @@ compiler.elf2hex.extra_flags=
 recipe.c.o.pattern="{compiler.path}{compiler.c.cmd}" {compiler.c.flags} -mmcu={build.mcu} -DF_CPU={build.f_cpu} -DARDUINO={runtime.ide.version} -DARDUINO_{build.board} -DARDUINO_ARCH_{build.arch} {compiler.c.extra_flags} {build.extra_flags} {includes} "{source_file}" -o "{object_file}"
 recipe.cpp.o.pattern="{compiler.path}{compiler.cpp.cmd}" {compiler.cpp.flags} -mmcu={build.mcu} -DF_CPU={build.f_cpu} -DARDUINO={runtime.ide.version} -DARDUINO_{build.board} -DARDUINO_ARCH_{build.arch} {compiler.cpp.extra_flags} {build.extra_flags} {includes} "{source_file}" -o "{object_file}"
 recipe.S.o.pattern="{compiler.path}{compiler.c.cmd}" {compiler.S.flags} -mmcu={build.mcu} -DF_CPU={build.f_cpu} -DARDUINO={runtime.ide.version} -DARDUINO_{build.board} -DARDUINO_ARCH_{build.arch} {compiler.S.extra_flags} {build.extra_flags} {includes} "{source_file}" -o "{object_file}"
-archive_file_path=C:\Users\tj\AppData\Local\V.Micro\Arduino\Builds\home_master\mega_atmega2560\core.a
+archive_file_path=C:\Users\tj\AppData\Local\V.Micro\Arduino\Builds\home_slave\mega_atmega2560\core.a
 recipe.ar.pattern="{compiler.path}{compiler.ar.cmd}" {compiler.ar.flags} {compiler.ar.extra_flags} "{archive_file_path}" "{object_file}"
 recipe.c.combine.pattern="{compiler.path}{compiler.c.elf.cmd}" {compiler.c.elf.flags} -mmcu={build.mcu} {compiler.c.elf.extra_flags} -o "{build.path}/{build.project_name}.elf" {object_files} "{build.path}/{archive_file}" "-L{build.path}" -lm
 recipe.objcopy.eep.pattern="{compiler.path}{compiler.objcopy.cmd}" {compiler.objcopy.eep.flags} {compiler.objcopy.eep.extra_flags} "{build.path}/{build.project_name}.elf" "{build.path}/{build.project_name}.eep"
@@ -623,20 +639,20 @@ vm.runtime.compiler.showwarnings=false
 serial.port.file=COM14
 serial.port=COM14
 serial.port.num=14
-build.source.path=D:\git_local\home_net\home_master\home_master.ino
-extra.time.local=68008347
-includes= -I"C:\Dev\Arduino\hardware\arduino\avr\cores\arduino"  -I"C:\Dev\Arduino\hardware\arduino\avr\variants\mega"  -I"G:\CloudDrives\OneDrive\W8_Cloud\Documents\Arduino\libraries\Keypad\src"  -I"G:\CloudDrives\OneDrive\W8_Cloud\Documents\Arduino\libraries\SimpleModbusMasterV2rev2"  -I"C:\Dev\Arduino\libraries"  -I"C:\Dev\Arduino\hardware\arduino\avr\libraries"  -I"C:\Program Files (x86)\Visual Micro\Visual Micro for Arduino\Micro Platforms\default\debuggers"  -I"G:\CloudDrives\OneDrive\W8_Cloud\Documents\Arduino\libraries" 
-build.path=C:\Users\tj\AppData\Local\V.Micro\Arduino\Builds\home_master\mega_atmega2560
-build.project_name=home_master
+build.source.path=D:\git_local\home_net\home_slave\home_slave.ino
+extra.time.local=30457672
+includes= -I"C:\Dev\Arduino\hardware\arduino\avr\cores\arduino"  -I"C:\Dev\Arduino\hardware\arduino\avr\variants\mega"  -I"G:\CloudDrives\OneDrive\W8_Cloud\Documents\Arduino\libraries\Arduino-Temperature-Control-Library-master"  -I"G:\CloudDrives\OneDrive\W8_Cloud\Documents\Arduino\libraries\Bounce2-master"  -I"G:\CloudDrives\OneDrive\W8_Cloud\Documents\Arduino\libraries\DHT-sensor-library-master"  -I"C:\Dev\Arduino\hardware\arduino\avr\libraries\EEPROM\src"  -I"G:\CloudDrives\OneDrive\W8_Cloud\Documents\Arduino\libraries\OneWire"  -I"G:\CloudDrives\OneDrive\W8_Cloud\Documents\Arduino\libraries\SimpleModbusSlaveV10"  -I"C:\Dev\Arduino\libraries"  -I"C:\Dev\Arduino\hardware\arduino\avr\libraries"  -I"C:\Program Files (x86)\Visual Micro\Visual Micro for Arduino\Micro Platforms\default\debuggers"  -I"G:\CloudDrives\OneDrive\W8_Cloud\Documents\Arduino\libraries" 
+build.path=C:\Users\tj\AppData\Local\V.Micro\Arduino\Builds\home_slave\mega_atmega2560
+build.project_name=home_slave
 build.variant.path=C:\Dev\Arduino\hardware\arduino\avr\variants\mega
 build.core.path=C:\Dev\Arduino\hardware\arduino\avr\cores\arduino
 archive_file=core.a
-build.path_sketch=C:\Users\tj\AppData\Local\V.Micro\Arduino\Builds\home_master\mega_atmega2560
-build.path_core=C:\Users\tj\AppData\Local\V.Micro\Arduino\Builds\home_master\mega_atmega2560\core
-build.path_libraries=C:\Users\tj\AppData\Local\V.Micro\Arduino\Builds\home_master\mega_atmega2560
-object_file=C:\Users\tj\AppData\Local\V.Micro\Arduino\Builds\home_master\mega_atmega2560\SimpleModbusMasterV2rev2\SimpleModbusMaster.cpp.o
-source_file=G:\CloudDrives\OneDrive\W8_Cloud\Documents\Arduino\libraries\SimpleModbusMasterV2rev2\SimpleModbusMaster.cpp
-object_files="C:\Users\tj\AppData\Local\V.Micro\Arduino\Builds\home_master\mega_atmega2560\home_master.cpp.o" "C:\Users\tj\AppData\Local\V.Micro\Arduino\Builds\home_master\mega_atmega2560\key_pad.cpp.o" "C:\Users\tj\AppData\Local\V.Micro\Arduino\Builds\home_master\mega_atmega2560\Keypad\Key.cpp.o" "C:\Users\tj\AppData\Local\V.Micro\Arduino\Builds\home_master\mega_atmega2560\Keypad\Keypad.cpp.o" "C:\Users\tj\AppData\Local\V.Micro\Arduino\Builds\home_master\mega_atmega2560\SimpleModbusMasterV2rev2\SimpleModbusMaster.cpp.o" 
+build.path_sketch=C:\Users\tj\AppData\Local\V.Micro\Arduino\Builds\home_slave\mega_atmega2560
+build.path_core=C:\Users\tj\AppData\Local\V.Micro\Arduino\Builds\home_slave\mega_atmega2560\core
+build.path_libraries=C:\Users\tj\AppData\Local\V.Micro\Arduino\Builds\home_slave\mega_atmega2560
+object_file=C:\Users\tj\AppData\Local\V.Micro\Arduino\Builds\home_slave\mega_atmega2560\SimpleModbusSlaveV10\SimpleModbusSlave.cpp.o
+source_file=G:\CloudDrives\OneDrive\W8_Cloud\Documents\Arduino\libraries\SimpleModbusSlaveV10\SimpleModbusSlave.cpp
+object_files="C:\Users\tj\AppData\Local\V.Micro\Arduino\Builds\home_slave\mega_atmega2560\home_slave.cpp.o" "C:\Users\tj\AppData\Local\V.Micro\Arduino\Builds\home_slave\mega_atmega2560\Arduino-Temperature-Control-Library-master\DallasTemperature.cpp.o" "C:\Users\tj\AppData\Local\V.Micro\Arduino\Builds\home_slave\mega_atmega2560\Bounce2-master\Bounce2.cpp.o" "C:\Users\tj\AppData\Local\V.Micro\Arduino\Builds\home_slave\mega_atmega2560\DHT-sensor-library-master\DHT.cpp.o" "C:\Users\tj\AppData\Local\V.Micro\Arduino\Builds\home_slave\mega_atmega2560\OneWire\OneWire.cpp.o" "C:\Users\tj\AppData\Local\V.Micro\Arduino\Builds\home_slave\mega_atmega2560\SimpleModbusSlaveV10\SimpleModbusSlave.cpp.o" 
 </arduino.board.property_bag>
         <arduino.build.mcu>atmega2560</arduino.build.mcu>
         <arduino.build.f_cpu>16000000L</arduino.build.f_cpu>
@@ -664,6 +680,15 @@ object_files="C:\Users\tj\AppData\Local\V.Micro\Arduino\Builds\home_master\mega_
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="keypad_class.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="key_pad.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="key_pad.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="master.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Visual Micro\.home_master.vsarduino.h">

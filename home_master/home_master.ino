@@ -1,8 +1,12 @@
 #include <SimpleModbusMaster.h>
 #include <Keypad.h>
+#include <Wire.h>
+#include "RTClib.h"
 #include "Key.h"
 #include <openGLCD.h>
 #include "keypad_class.h"
+
+#include "master.h"
 /*
    The example will use packet1 to read a register from address 0 (the adc ch0 value)
    from the arduino slave (id=1). It will then use this value to adjust the brightness
@@ -11,22 +15,17 @@
    on the arduino slave (id=1) adjusting the brightness of an led on pin 9 using PWM.
 */
 
-//////////////////// Port information ///////////////////
-#define baud 38400
-#define timeout 1000
-#define polling 200 // the scan rate
-#define retry_count 4
-
-// used to toggle the receive/transmit pin on the driver
-#define TxEnablePin 4 
-
-#define LED 9
-
-keypad_class  ky;
 
 // This is the easiest way to create new packets
 // Add as many as you want. TOTAL_NO_OF_PACKETS
 // is automatically updated.
+
+
+		RTC_DS3231 rtc;
+		char daysOfTheWeek[7][12] = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
+		
+		DateTime curTime;
+
 
 //////////////// registers of your slave ///////////////////
 enum SLAVE_RESOURCES
@@ -43,8 +42,11 @@ enum SLAVE_RESOURCES
 	SR_RGB_1_R,   // OUTPUT PINS
 	SR_RGB_1_G,   // OUTPUT PINS
 	SR_RGB_1_B,   // OUTPUT PINS
-	SR_RELAY_1 // OUTPUT PINS
-
+	SR_RELAY_1, // OUTPUT PINS
+	SR_DHT11_1_T_MSB,
+	SR_DHT11_1_T_LSB,
+	SR_DHT11_1_H_MSB,
+	SR_DHT11_1_H_LSB,
 };
 
 
@@ -68,7 +70,10 @@ enum LOCAL_REGISTERS
 	LR_SET_RGB_B_ON2,
 
 	LR_GET_SWITCH_ON3,
-	
+	LR_DHT11_T_MSB_ON4,
+	LR_DHT11_T_LSB_ON4,	
+	LR_DHT11_H_MSB_ON4,
+	LR_DHT11_H_LSB_ON4,
 	HOLDING_REGS_SIZE // leave this one
 	// total number of registers for function 3 and 16 share the same register array
 	// i.e. the same address space	
@@ -91,6 +96,7 @@ enum
 	PACKET_SET_RGB_ON3,	
 	PACKET_SET_RGB_ON4,	
 	PACKET_GET_RGB_ON4,	
+	PACKET_DHT11_ON_SLAVE4,
 	TOTAL_NO_OF_PACKETS // leave this last entry
 };
 
@@ -102,6 +108,8 @@ unsigned int regs[TOTAL_NO_OF_REGISTERS];
 
 unsigned long tick;
 union Pun {float f; uint32_t u;}; 
+
+keypad_class  ky(&curTime);
 	
 void setup()
 {
@@ -115,6 +123,8 @@ void setup()
 	modbus_construct(&packets[PACKET_POT_ON2],   2, READ_HOLDING_REGISTERS, SR_POT_1,1, LR_POT_ON2,false);
  
 	modbus_construct(&packets[PACKET_TEMP_ON_SLAVE4], 4, READ_HOLDING_REGISTERS, SR_TEMP_1_MSB ,2,  LR_TEMP_MSB_ON4,false); 
+	
+	modbus_construct(&packets[PACKET_DHT11_ON_SLAVE4], 4, READ_HOLDING_REGISTERS, SR_DHT11_1_T_MSB ,4,  LR_DHT11_T_MSB_ON4,false); 
 
 	modbus_construct(&packets[PACKET_PIR_ON_SLAVE_4], 4, READ_HOLDING_REGISTERS, SR_PIR_1,1,  LR_PIR_ON4,false); 
 	
@@ -150,7 +160,20 @@ void setup()
   
   
   gloabl_RGB(12,232,1);
+  
    ky.lcd_test();
+   
+   ky.callme(&keyTrigger)  ;
+   
+   ky.init();
+
+ if (! rtc.begin()) {
+	 Serial.println("Couldn't find RTC");
+	 while (1);
+ }
+
+	curTime = rtc.now();
+	
 }
 
 void loop()
@@ -164,15 +187,30 @@ void loop()
    
    if ((millis()-tick) > 1000){
 		tick = millis();
-		Serial.print("REG HR_POT_1: ");
-		Serial.println(regs[LR_POT_ON2]);
-		Serial.print("REG HR_TEMP_1_ON_SLAVE4: ");
-		Serial.println(decodeFloat(&regs[ LR_TEMP_MSB_ON4]));		
+		
+		curTime = rtc.now();
+		
+		
+		//Serial.print("REG HR_POT_1: ");
+		//Serial.println(regs[LR_POT_ON2]);
+	
+		ky.set_sense_temperature(0,decodeFloat(&regs[ LR_TEMP_MSB_ON4]),"INSIDE");
+		ky.set_sense_temperature(1,decodeFloat(&regs[ LR_DHT11_T_MSB_ON4]),"DHT11_TEMPERATURE");
+		ky.set_sense_temperature(2,decodeFloat(&regs[ LR_DHT11_H_MSB_ON4]),"DHT11_HUMIDITY");
+
+		Serial.print("DHT11_ON_SLAVE4: ");
+		Serial.println(decodeFloat(&regs[LR_DHT11_T_MSB_ON4]));
+
+			
 		Serial.print("REG HR_PIR_1: ");
 		Serial.println(regs[LR_PIR_ON4]);	
 
 		Serial.print("REG PACKET_GET_SWITCH_ON3: ");
 		Serial.println(regs[LR_GET_SWITCH_ON3]);
+		
+		
+		
+		
 		
 		//regs[LR_SET_RGB_R_ON4] = regs[LR_SET_RGB_R_ON4] +10;  //TJ_PLAY
 		//if (regs[LR_SET_RGB_R_ON4] > 256) {
@@ -268,4 +306,8 @@ float gloabl_RGB(byte r, byte g, byte b)
 	packets[PACKET_SET_RGB_ON4].id=0;
 	packets[PACKET_SET_RGB_ON4].run_countown=1;	
 	
+}
+
+void keyTrigger(String msg){
+	Serial.println("=======================" + msg + "===========");
 }
