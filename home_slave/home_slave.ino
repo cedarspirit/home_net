@@ -5,6 +5,8 @@
 
 #include <DallasTemperature.h>
 #include <dht.h>
+#include "common.h"
+#include "rgb_class.h"
 
 
 /* 
@@ -41,7 +43,7 @@
    limited to its internal buffer which differs between manufactures. 
 */
 
-#define  LED 9  
+  
 #define SLAVE_ID 3
 #define DHTPIN 5     // what pin we're connected to
 #define DHTTYPE DHT21    //DHT11   // DHT 11
@@ -65,6 +67,9 @@ union Pun {float f; uint32_t u;};  //http://stackoverflow.com/questions/28185196
 
 dht DHT;
 
+rgb_class oRGB;
+
+
 // Using the enum instruction allows for an easy method for adding and 
 // removing registers. Doing it this way saves you #defining the size 
 // of your slaves register array each time you want to add more registers
@@ -82,14 +87,12 @@ enum EEPROM_STORE_X{
 };
 /// **** EEPROM BLOCK ENDS
 
-struct RGB {
-	byte r;
-	byte g;
-	byte b;
-};
+
 
 RGB curRGB;
 byte curSwitch_1;
+
+
 
 enum EEPROM_STORE{     // build hardware info based on HW Profile from EEPROM
 	HP_DEVICE_ADDR,
@@ -109,7 +112,6 @@ enum SLAVE_RESOURCES
 {     
   // just add or remove registers and your good to go...
   // The first register starts at address 0
-  
 	HR_HW_PROFILE,
 	HR_TEMP_1_MSB, 
 	HR_TEMP_1_LSB, 
@@ -124,6 +126,14 @@ enum SLAVE_RESOURCES
 	HR_DHT11_1_T_LSB,
 	HR_DHT11_1_H_MSB,
 	HR_DHT11_1_H_LSB,
+	HR_CMD_DATA_1,
+	HR_CMD_DATA_2,
+	HR_CMD_DATA_3,
+	HR_CMD_DATA_4,
+	HR_CMD_DATA_5,
+	HR_CMD_DATA_6,
+	HR_CMD_DATA_7,
+	HR_CMD_DATA_8,	
 	HOLDING_REGS_SIZE // leave this one
   // total number of registers for function 3 and 16 share the same register array
   // i.e. the same address space
@@ -143,20 +153,26 @@ byte curRelayStatus;
 
 Bounce debouncer = Bounce(); 
 
+
+
 void setup()
 {
 	
+	oRGB.init();
+	oRGB.set_mode(RGB_SHOW);
 	
 	hw_address =  EEPROM.read (EEP_DEVICE_ADDR);
 	hw_profile =  EEPROM.read (EEP_HW_PROFILE);
 	fncBuildHwConfiguration(hw_profile);
 	
-	
+	pinMode(13, OUTPUT);  //LED test
 	
 	holdingRegs[HR_RGB_1_R] = 0xff;
 	holdingRegs[HR_RGB_1_G] = 0xff;
 	holdingRegs[HR_RGB_1_B] = 0xff;
-	fncSetRGB (0xff,0xff,0xff);
+	
+ 
+	
 	
 	if (cfg_hw[HP_TEMP_1])
 		{
@@ -201,34 +217,13 @@ void setup()
 	
 	holdingRegs[HR_HW_PROFILE] = hw_profile;		
 	
-  /* parameters(HardwareSerial* SerialPort,
-                long baudrate, 
-		unsigned char byteFormat,
-                unsigned char ID, 
-                unsigned char transmit enable pin, 
-                unsigned int holding registers size,
-                unsigned int* holding register array)
-  */
-  
-  /* Valid modbus byte formats are:
-     SERIAL_8N2: 1 start bit, 8 data bits, 2 stop bits
-     SERIAL_8E1: 1 start bit, 8 data bits, 1 Even parity bit, 1 stop bit
-     SERIAL_8O1: 1 start bit, 8 data bits, 1 Odd parity bit, 1 stop bit
-     
-     You can obviously use SERIAL_8N1 but this does not adhere to the
-     Modbus specifications. That said, I have tested the SERIAL_8N1 option 
-     on various commercial masters and slaves that were suppose to adhere
-     to this specification and was always able to communicate... Go figure.
-     
-     These byte formats are already defined in the Arduino global name space. 
-  */
-	
   modbus_configure(&Serial, 38400 , SERIAL_8N1, hw_address, 4, HOLDING_REGS_SIZE, holdingRegs );
 
   // modbus_update_comms(baud, byteFormat, id) is not needed but allows for easy update of the
   // port variables and slave id dynamically in any function.
   modbus_update_comms(38400, SERIAL_8N1, hw_address);
   
+
    
 }
 
@@ -238,6 +233,11 @@ void loop()
   // count since the slave started. You don't have to use it but it's useful
   // for fault finding by the modbus master.
   
+ 
+
+  
+  
+   oRGB.update();
   modbus_update();
   
   
@@ -320,35 +320,20 @@ if (cfg_hw[HP_DHT11_1])
 	}	
 
 
-
-
-
 	if(cfg_hw[HP_PIR_1]){
 		holdingRegs[HR_PIR_1]=  digitalRead(PIN_PIR);
-		
-		setRelay (holdingRegs[HR_PIR_1]) ; 
-		
-	}
-	
-	
-	if(cfg_hw[HP_PIR_1]){
-		holdingRegs[HR_PIR_1]=  digitalRead(PIN_PIR);
-		
-		setRelay (holdingRegs[HR_PIR_1]) ;
-		
 	}
 	
 	
 	
-	fncSetRGB (holdingRegs[HR_RGB_1_R],holdingRegs[HR_RGB_1_G],holdingRegs[HR_RGB_1_B]);	
-
-  
 	update_input_switch_1();
 	
+	scan_for_command();  //check if  HR_CMD_DATA_1 registor > 0 
+	
+	
 
-	
-	
-  
+	oRGB.update();
+ 
 }
 
 
@@ -362,24 +347,24 @@ void fncBuildHwConfiguration(byte thisProfile){
 		
 		switch(thisProfile){
 			case 0:
-			break;
+				break;
 			case 1:
-			break;
+				break;
 			case 2:
-			cfg_hw[HP_RGB_1]=true;
-			cfg_hw[HP_POT_1]=true;
-			break;
+				cfg_hw[HP_RGB_1]=true;
+				cfg_hw[HP_POT_1]=true;
+				break;
 			case 3:
-			cfg_hw[HP_RGB_1]=true;
-			cfg_hw[HP_SWITCH_1]=true;
-			break;
+				cfg_hw[HP_RGB_1]=true;
+				cfg_hw[HP_SWITCH_1]=true;
+				break;
 			case 4:
-			cfg_hw[HP_RGB_1]=true;
-			cfg_hw[HP_TEMP_1]=true;
-			cfg_hw[HP_RELAY_1]=true;
-			cfg_hw[HP_PIR_1]=true;
-			cfg_hw[HP_DHT11_1]=true;
-			break;
+				cfg_hw[HP_RGB_1]=true;
+				cfg_hw[HP_TEMP_1]=true;
+				cfg_hw[HP_RELAY_1]=true;
+				cfg_hw[HP_PIR_1]=true;
+				cfg_hw[HP_DHT11_1]=true;
+				break;
 			default:
 			break;
 		}
@@ -442,3 +427,46 @@ void update_input_switch_1()	{
 			holdingRegs[HR_SWITCH_1] =  HIGH;
 		}
 	}
+
+void scan_for_command(){
+	//check if  HR_CMD_DATA_1 registor > 0 
+	byte cmd = holdingRegs[HR_CMD_DATA_1];
+	holdingRegs[HR_CMD_DATA_1]=0;  // reset command
+	switch (cmd) {
+		case 0:
+			break;
+		case 1:
+			
+			if (holdingRegs[HR_CMD_DATA_2] == 0) {
+				oRGB.set_mode( ALL_OFF);
+			}	
+			else {
+				oRGB.set_mode( RGB_SHOW);
+			}
+				
+			break;
+		case 2: // RELAY CONTROL
+			if (holdingRegs[HR_CMD_DATA_2] == 0) {
+				setRelay (RELAY_OFF);
+			}
+			else 
+			{
+				setRelay (RELAY_ON);
+			}
+			break;
+		case 3:  // ALL ON
+			if (holdingRegs[HR_CMD_DATA_2] == 0) {
+				oRGB.set_mode(ALL_ON_HIGH);
+			}
+			else
+			{
+				oRGB.set_mode(ALL_ON_DIM);
+			}
+			break;
+			
+		default:
+			break;
+	}
+	
+	
+}

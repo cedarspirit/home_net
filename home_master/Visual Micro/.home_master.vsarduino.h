@@ -26,6 +26,7 @@ void encodeFloat(uint16_t *regs, float x);
 float decodeFloat(const uint16_t *regs);
 float gloabl_RGB(byte r, byte g, byte b);
 void keyTrigger(String msg);
+void send_cmd(byte dest, byte datacount);
 
 #include "C:\Dev\Arduino\hardware\arduino\avr\variants\mega\pins_arduino.h" 
 #include "C:\Dev\Arduino\hardware\arduino\avr\cores\arduino\arduino.h"

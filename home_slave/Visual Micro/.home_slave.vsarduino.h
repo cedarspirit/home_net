@@ -28,7 +28,11 @@ void setRelay(byte val);
 void encodeFloat(uint16_t *regs, float x);
 float decodeFloat(const uint16_t *regs);
 void update_input_switch_1();
+void scan_for_command();
 
 #include "C:\Dev\Arduino\hardware\arduino\avr\variants\eightanaloginputs\pins_arduino.h" 
 #include "C:\Dev\Arduino\hardware\arduino\avr\cores\arduino\arduino.h"
 #include <home_slave.ino>
+#include <common.h>
+#include <rgb_class.cpp>
+#include <rgb_class.h>

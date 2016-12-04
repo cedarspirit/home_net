@@ -39,14 +39,22 @@ enum SLAVE_RESOURCES
 	SR_POT_1,
 	SR_PIR_1,
 	SR_SWITCH_1,
-	SR_RGB_1_R,   // OUTPUT PINS
-	SR_RGB_1_G,   // OUTPUT PINS
-	SR_RGB_1_B,   // OUTPUT PINS
-	SR_RELAY_1, // OUTPUT PINS
+	SR_RGB_1_R,			// OUTPUT PINS
+	SR_RGB_1_G,			// OUTPUT PINS
+	SR_RGB_1_B,			// OUTPUT PINS
+	SR_RELAY_1,			// OUTPUT PINS
 	SR_DHT11_1_T_MSB,
 	SR_DHT11_1_T_LSB,
 	SR_DHT11_1_H_MSB,
 	SR_DHT11_1_H_LSB,
+	SR_CMD_DATA_1,
+	SR_CMD_DATA_2,
+	SR_CMD_DATA_3,
+	SR_CMD_DATA_4,
+	SR_CMD_DATA_5,
+	SR_CMD_DATA_6,
+	SR_CMD_DATA_7,
+	SR_CMD_DATA_8,
 };
 
 
@@ -74,14 +82,24 @@ enum LOCAL_REGISTERS
 	LR_DHT11_T_LSB_ON4,	
 	LR_DHT11_H_MSB_ON4,
 	LR_DHT11_H_LSB_ON4,
-	HOLDING_REGS_SIZE // leave this one
+	
+	LR_CMD_DATA_1,
+	LR_CMD_DATA_2,
+	LR_CMD_DATA_3,
+	LR_CMD_DATA_4,
+	LR_CMD_DATA_5,
+	LR_CMD_DATA_6,
+	LR_CMD_DATA_7,
+	LR_CMD_DATA_8,
+	
+	HOLDING_REGS_SIZE  // leave this one
 	// total number of registers for function 3 and 16 share the same register array
 	// i.e. the same address space	
 };
 
 
 // The total amount of available memory on the master to store data
-#define TOTAL_NO_OF_REGISTERS HOLDING_REGS_SIZE
+#define TOTAL_NO_OF_REGISTERS HOLDING_REGS_SIZE 
 
 unsigned char cur_pir;
 byte curSwitchOn4;
@@ -97,6 +115,7 @@ enum
 	PACKET_SET_RGB_ON4,	
 	PACKET_GET_RGB_ON4,	
 	PACKET_DHT11_ON_SLAVE4,
+	PACKET_SEND_CMD,
 	TOTAL_NO_OF_PACKETS // leave this last entry
 };
 
@@ -108,6 +127,9 @@ unsigned int regs[TOTAL_NO_OF_REGISTERS];
 
 unsigned long tick;
 union Pun {float f; uint32_t u;}; 
+
+
+
 
 keypad_class  ky(&curTime);
 	
@@ -138,6 +160,7 @@ void setup()
 	
 	modbus_construct(&packets[PACKET_GET_SWITCH_ON3],   3, READ_HOLDING_REGISTERS,SR_SWITCH_1 ,1, LR_GET_SWITCH_ON3,false);
 	
+	modbus_construct(&packets[PACKET_SEND_CMD],   0, PRESET_MULTIPLE_REGISTERS,SR_CMD_DATA_1 ,1 , LR_CMD_DATA_1,false);
 	
  
 	
@@ -198,15 +221,15 @@ void loop()
 		ky.set_sense_temperature(1,decodeFloat(&regs[ LR_DHT11_T_MSB_ON4]),"DHT11_TEMPERATURE");
 		ky.set_sense_temperature(2,decodeFloat(&regs[ LR_DHT11_H_MSB_ON4]),"DHT11_HUMIDITY");
 
-		Serial.print("DHT11_ON_SLAVE4: ");
-		Serial.println(decodeFloat(&regs[LR_DHT11_T_MSB_ON4]));
+		//Serial.print("DHT11_ON_SLAVE4: ");
+		//Serial.println(decodeFloat(&regs[LR_DHT11_T_MSB_ON4]));
 
 			
-		Serial.print("REG HR_PIR_1: ");
-		Serial.println(regs[LR_PIR_ON4]);	
+		//Serial.print("REG HR_PIR_1: ");
+		//Serial.println(regs[LR_PIR_ON4]);	
 
-		Serial.print("REG PACKET_GET_SWITCH_ON3: ");
-		Serial.println(regs[LR_GET_SWITCH_ON3]);
+		//Serial.print("REG PACKET_GET_SWITCH_ON3: ");
+		//Serial.println(regs[LR_GET_SWITCH_ON3]);
 		
 		
 		
@@ -223,11 +246,16 @@ void loop()
    if(curSwitchOn4!= regs[LR_GET_SWITCH_ON3]){
 	   curSwitchOn4= regs[LR_GET_SWITCH_ON3];
 	   if (curSwitchOn4 == 1){
-		   gloabl_RGB (12,232,1);
+		   
+		   regs[LR_CMD_DATA_1] = 1;
+		   regs[LR_CMD_DATA_2] = 1;		   
+		   send_cmd (3,2);
 		} 
 		else 
 		{
-		   gloabl_RGB (0,255,255);
+		   regs[LR_CMD_DATA_1] = 1;
+		   regs[LR_CMD_DATA_2] = 0;
+		   send_cmd (3,2);
 		}
    }
    
@@ -239,6 +267,8 @@ void loop()
    
    ky.read_kc();
    
+   
+  
 }
 
 
@@ -310,4 +340,53 @@ float gloabl_RGB(byte r, byte g, byte b)
 
 void keyTrigger(String msg){
 	Serial.println("=======================" + msg + "===========");
+	
+	switch (msg.toInt()) {
+		case 1:
+			regs[LR_CMD_DATA_1] = 1;
+			regs[LR_CMD_DATA_2] = 1;
+			send_cmd (0,2);		
+			break;
+		case 2:
+			regs[LR_CMD_DATA_1] = 1;
+			regs[LR_CMD_DATA_2] = 0;
+			send_cmd (0,2);
+			break;
+		case 3:
+			regs[LR_CMD_DATA_1] = 2;
+			regs[LR_CMD_DATA_2] = 1;
+			send_cmd (0,2);
+			break;
+		case 4:
+			regs[LR_CMD_DATA_1] = 2;
+			regs[LR_CMD_DATA_2] = 0;
+			send_cmd (0,2);
+			break;
+		case 5:
+			regs[LR_CMD_DATA_1] = 3;
+			regs[LR_CMD_DATA_2] = 0;
+			send_cmd (0,2);
+			break;
+		case 6:
+			regs[LR_CMD_DATA_1] = 3;
+			regs[LR_CMD_DATA_2] = 1;
+			send_cmd (0,2);
+			break;
+			
+		default:
+			break;
+	}
+	
+	
+}
+
+
+void send_cmd(byte dest, byte datacount){
+
+	packets[PACKET_SEND_CMD].id=dest;
+	packets[PACKET_SEND_CMD].run_countown=1;
+	packets[PACKET_SEND_CMD].data = datacount;
+
+	Serial.println("SENDING COMMAND");
+	
 }

@@ -622,6 +622,15 @@ build.arch=AVR
     <Folder Include="Visual Micro\" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="common.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="rgb_class.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="rgb_class.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="Visual Micro\.home_slave.vsarduino.h">
       <SubType>compile</SubType>
     </Compile>
