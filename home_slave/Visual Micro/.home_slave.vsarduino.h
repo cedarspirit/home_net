@@ -24,6 +24,7 @@ extern "C" void __cxa_pure_virtual() {;}
 //
 void fncBuildHwConfiguration(byte thisProfile);
 void fncSetRGB(byte r, byte g, byte b);
+void toggleRelay();
 void setRelay(byte val);
 void encodeFloat(uint16_t *regs, float x);
 float decodeFloat(const uint16_t *regs);

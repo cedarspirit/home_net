@@ -38,7 +38,8 @@ enum SLAVE_RESOURCES
 	SR_TEMP_1_LSB,
 	SR_POT_1,
 	SR_PIR_1,
-	SR_SWITCH_1,
+	HR_SWITCH_1_TOGGLE,
+	HR_SWITCH_1_STATUS,	
 	SR_RGB_1_R,			// OUTPUT PINS
 	SR_RGB_1_G,			// OUTPUT PINS
 	SR_RGB_1_B,			// OUTPUT PINS
@@ -77,7 +78,8 @@ enum LOCAL_REGISTERS
 	LR_SET_RGB_G_ON2,
 	LR_SET_RGB_B_ON2,
 
-	LR_GET_SWITCH_ON3,
+	LR_GET_SWITCH_ON3_TOGGLE,
+	LR_GET_SWITCH_ON3_STATUS,
 	LR_DHT11_T_MSB_ON4,
 	LR_DHT11_T_LSB_ON4,	
 	LR_DHT11_H_MSB_ON4,
@@ -103,6 +105,7 @@ enum LOCAL_REGISTERS
 
 unsigned char cur_pir;
 byte curSwitchOn4;
+unsigned int curSwitchOn4_toggle=0 ; 
 
 enum
 {
@@ -158,9 +161,9 @@ void setup()
 	
 	modbus_construct(&packets[PACKET_GET_RGB_ON4],   4, READ_HOLDING_REGISTERS,SR_RGB_1_R ,3, LR_SET_RGB_R_ON4,true);
 	
-	modbus_construct(&packets[PACKET_GET_SWITCH_ON3],   3, READ_HOLDING_REGISTERS,SR_SWITCH_1 ,1, LR_GET_SWITCH_ON3,false);
+	modbus_construct(&packets[PACKET_GET_SWITCH_ON3],   3, READ_HOLDING_REGISTERS,HR_SWITCH_1_TOGGLE ,2, LR_GET_SWITCH_ON3_TOGGLE,false);
 	
-	modbus_construct(&packets[PACKET_SEND_CMD],   0, PRESET_MULTIPLE_REGISTERS,SR_CMD_DATA_1 ,1 , LR_CMD_DATA_1,false);
+	modbus_construct(&packets[PACKET_SEND_CMD],   0, PRESET_MULTIPLE_REGISTERS,SR_CMD_DATA_1 ,1 , LR_CMD_DATA_1,  true);
 	
  
 	
@@ -242,20 +245,30 @@ void loop()
 		//gloabl_RGB	(regs[LR_SET_RGB_R_ON4],regs[LR_SET_RGB_R_ON4],regs[LR_SET_RGB_R_ON4]); //TJ_PLAY	
    }
    
+   if(curSwitchOn4_toggle!=regs[LR_GET_SWITCH_ON3_TOGGLE]){
+	    curSwitchOn4_toggle=regs[LR_GET_SWITCH_ON3_TOGGLE];
+		Serial.print(">>> TOGGLE REQUEST ");
+		Serial.println(curSwitchOn4_toggle);
+		//test -> send acommand to toggle relay on HW 4
+		 regs[LR_CMD_DATA_1] = 4;  // COMMAND 4
+		 regs[LR_CMD_DATA_2] = 0;
+		 send_cmd (4,2);  // SEND the above Command  to BOARD 4 and no data so only 1 byte	
+   }
+
    
-   if(curSwitchOn4!= regs[LR_GET_SWITCH_ON3]){
-	   curSwitchOn4= regs[LR_GET_SWITCH_ON3];
+   if(curSwitchOn4!= regs[LR_GET_SWITCH_ON3_STATUS]){
+	   curSwitchOn4= regs[LR_GET_SWITCH_ON3_STATUS];
 	   if (curSwitchOn4 == 1){
 		   
-		   regs[LR_CMD_DATA_1] = 1;
-		   regs[LR_CMD_DATA_2] = 1;		   
-		   send_cmd (3,2);
+		//   regs[LR_CMD_DATA_1] = 1;
+		 //  regs[LR_CMD_DATA_2] = 1;		   
+		 //  send_cmd (3,2);
 		} 
 		else 
 		{
-		   regs[LR_CMD_DATA_1] = 1;
-		   regs[LR_CMD_DATA_2] = 0;
-		   send_cmd (3,2);
+		  // regs[LR_CMD_DATA_1] = 1;
+		  // regs[LR_CMD_DATA_2] = 0;
+		//   send_cmd (3,2);
 		}
    }
    

@@ -92,7 +92,7 @@ enum EEPROM_STORE_X{
 RGB curRGB;
 byte curSwitch_1;
 
-
+boolean last_switch_state = HIGH ; // for the toggle switch
 
 enum EEPROM_STORE{     // build hardware info based on HW Profile from EEPROM
 	HP_DEVICE_ADDR,
@@ -117,7 +117,8 @@ enum SLAVE_RESOURCES
 	HR_TEMP_1_LSB, 
 	HR_POT_1,
 	HR_PIR_1,
-	HR_SWITCH_1,
+	HR_SWITCH_1_TOGGLE,
+	HR_SWITCH_1_STATUS,
 	HR_RGB_1_R,   // OUTPUT PINS
 	HR_RGB_1_G,   // OUTPUT PINS
 	HR_RGB_1_B,   // OUTPUT PINS
@@ -148,6 +149,7 @@ byte hw_address;
 byte hw_profile;
 
 unsigned long last_temperature_sample_time;
+boolean request_temperature = true;
 unsigned long last_dht11_sample_time;
 byte curRelayStatus;
 
@@ -179,7 +181,9 @@ void setup()
 		  sensors.begin();
 		  sensors.getAddress(sensorDeviceAddress, 0);
 		  sensors.setResolution(sensorDeviceAddress, SENSOR_RESOLUTION);
-		  last_temperature_sample_time = millis();			
+		  sensors.setWaitForConversion(false);  // makes it async
+		  last_temperature_sample_time = millis();		
+		  request_temperature = true; 	//for async operation
 		}
 	
 	if (cfg_hw[HP_DHT11_1]) {
@@ -258,15 +262,20 @@ void loop()
   */
 
 
-
 	if (cfg_hw[HP_TEMP_1])
 	{
 		if ((last_temperature_sample_time - millis() ) > 1000) {
 			last_temperature_sample_time= millis();
-
-	 //holdingRegs[HR_TEMP_1_MSB] = millis();  //TJ TEST ONLY
+		//holdingRegs[HR_TEMP_1_MSB] = millis();  //TJ TEST ONLY
+		if (request_temperature) {
 			sensors.requestTemperatures();
+			request_temperature = false;
+		}
+		else {
 			encodeFloat(&holdingRegs[HR_TEMP_1_MSB],sensors.getTempCByIndex(SENSOR_INDEX)) ;
+			request_temperature = true;
+		}
+		
 			
 		}
 	}
@@ -389,6 +398,10 @@ void fncSetRGB(byte r, byte g, byte b)
 	
 }
 
+void toggleRelay(){ //http://forum.arduino.cc/index.php?topic=41954.0
+	digitalWrite(RELAY_1_PIN, !digitalRead(RELAY_1_PIN));
+	curRelayStatus = digitalRead(RELAY_1_PIN);
+}
 
 void setRelay(byte val){
 	
@@ -420,11 +433,19 @@ void update_input_switch_1()	{
 		if (cfg_hw[HP_SWITCH_1])
 		{
 			debouncer.update(); // Update the Bounce instance :
-			holdingRegs[HR_SWITCH_1] =  debouncer.read();			 // Get the updated value :
+			boolean curState = debouncer.read();
+			holdingRegs[HR_SWITCH_1_STATUS] = curState;  // Get the updated value :
+			if ((curState != last_switch_state) ){
+				last_switch_state = curState;
+				if (curState == LOW) 
+				{
+					++holdingRegs[HR_SWITCH_1_TOGGLE];
+				}
+			}
 		}
 		else
 		{
-			holdingRegs[HR_SWITCH_1] =  HIGH;
+			holdingRegs[HR_SWITCH_1_STATUS] =  HIGH;
 		}
 	}
 
@@ -447,7 +468,8 @@ void scan_for_command(){
 			break;
 		case 2: // RELAY CONTROL
 			if (holdingRegs[HR_CMD_DATA_2] == 0) {
-				setRelay (RELAY_OFF);
+				toggleRelay();
+				//setRelay (RELAY_OFF);
 			}
 			else 
 			{
@@ -463,7 +485,9 @@ void scan_for_command(){
 				oRGB.set_mode(ALL_ON_DIM);
 			}
 			break;
-			
+		case 4: // toggle relay
+			toggleRelay();
+			break;
 		default:
 			break;
 	}

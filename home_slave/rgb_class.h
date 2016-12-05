@@ -53,8 +53,8 @@ class rgb_class
 
 	private:
 	
-	#define SHOW_INTERVAL 10000
-	#define SHOW_TICK 15
+	#define SHOW_INTERVAL 5000
+	#define SHOW_TICK 10
 	unsigned long show_interval;
 	RGB show_val;
 	
